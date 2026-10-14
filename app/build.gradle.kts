@@ -8,6 +8,26 @@ plugins {
   alias(libs.plugins.google.services)
 }
 
+val debugKeystore = rootProject.file("debug.keystore")
+if (!debugKeystore.exists()) {
+  logger.lifecycle("Generating missing debug keystore at ${debugKeystore.absolutePath}")
+  exec {
+    commandLine(
+      "keytool",
+      "-genkeypair",
+      "-v",
+      "-keystore", debugKeystore.absolutePath,
+      "-alias", "androiddebugkey",
+      "-keyalg", "RSA",
+      "-keysize", "2048",
+      "-validity", "10000",
+      "-storepass", "android",
+      "-keypass", "android",
+      "-dname", "CN=Android Debug,O=Android,C=US"
+    )
+  }
+}
+
 android {
   namespace = "com.example"
   compileSdk { version = release(36) { minorApiLevel = 1 } }
@@ -33,7 +53,7 @@ android {
       keyPassword = System.getenv("KEY_PASSWORD")
     }
     create("debugConfig") {
-      storeFile = file("${rootDir}/debug.keystore")
+      storeFile = debugKeystore
       storePassword = "android"
       keyAlias = "androiddebugkey"
       keyPassword = "android"
