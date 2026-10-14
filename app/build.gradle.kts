@@ -9,23 +9,36 @@ plugins {
 }
 
 val debugKeystore = rootProject.file("debug.keystore")
+fun generateDebugKeystore(path: File) {
+  val keytoolExecutable = File(System.getProperty("java.home"), "bin/keytool")
+  val keytoolPath = if (keytoolExecutable.exists()) keytoolExecutable.absolutePath else "keytool"
+
+  val process = ProcessBuilder(
+    keytoolPath,
+    "-genkeypair",
+    "-v",
+    "-keystore", path.absolutePath,
+    "-alias", "androiddebugkey",
+    "-keyalg", "RSA",
+    "-keysize", "2048",
+    "-validity", "10000",
+    "-storepass", "android",
+    "-keypass", "android",
+    "-dname", "CN=Android Debug,O=Android,C=US"
+  )
+    .redirectErrorStream(true)
+    .start()
+
+  val exitCode = process.waitFor()
+  if (exitCode != 0) {
+    val output = process.inputStream.bufferedReader().readText()
+    throw GradleException("Failed to generate debug keystore at ${path.absolutePath}. Output:\n$output")
+  }
+}
+
 if (!debugKeystore.exists()) {
   logger.lifecycle("Generating missing debug keystore at ${debugKeystore.absolutePath}")
-  project.exec {
-    commandLine(
-      "keytool",
-      "-genkeypair",
-      "-v",
-      "-keystore", debugKeystore.absolutePath,
-      "-alias", "androiddebugkey",
-      "-keyalg", "RSA",
-      "-keysize", "2048",
-      "-validity", "10000",
-      "-storepass", "android",
-      "-keypass", "android",
-      "-dname", "CN=Android Debug,O=Android,C=US"
-    )
-  }
+  generateDebugKeystore(debugKeystore)
 }
 
 android {
