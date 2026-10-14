@@ -11,7 +11,7 @@ plugins {
 val debugKeystore = rootProject.file("debug.keystore")
 if (!debugKeystore.exists()) {
   logger.lifecycle("Generating missing debug keystore at ${debugKeystore.absolutePath}")
-  exec {
+  project.exec {
     commandLine(
       "keytool",
       "-genkeypair",
