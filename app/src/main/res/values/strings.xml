@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Termux Hub</string>
+    <string name="header_subtitle">OpenWebUI Shell Console</string>
+    <string name="prompt_placeholder">Send command to Termux (e.g. uname -a, top -n 1)...</string>
+    <string name="execute_button">Run</string>
+    <string name="mode_background">Background</string>
+    <string name="mode_session">Termux Window</string>
+    <string name="status_ready">Connected</string>
+    <string name="status_termux_missing">Termux not found</string>
+    <string name="setup_guide_title">Termux Configuration</string>
+    <string name="setup_guide_step1">1. Open Termux and ensure external apps are permitted:</string>
+    <string name="setup_guide_command">mkdir -p ~/.termux &amp;&amp; echo "allow-external-apps = true" &gt;&gt; ~/.termux/termux.properties &amp;&amp; termux-reload-settings</string>
+    <string name="setup_guide_step2">2. Restart Termux once for settings to take effect.</string>
+    <string name="copy_setup_command">Copy Command</string>
+    <string name="close">Close</string>
+    <string name="clear_logs">Clear Console</string>
+    <string name="presets_title">Quick Presets</string>
+    <string name="preset_system_info">System Info</string>
+    <string name="preset_cpu_info">CPU &amp; Architecture</string>
+    <string name="preset_memory_disk">RAM &amp; Storage</string>
+    <string name="preset_processes">Top Processes</string>
+    <string name="preset_ip_network">Network Interfaces</string>
+    <string name="empty_console_title">Welcome to Termux Hub</string>
+    <string name="empty_console_subtitle">Send shell commands to your local Termux environment or pick a preset below.</string>
+    <string name="copied_to_clipboard">Copied to clipboard</string>
+    <string name="running_command">Executing command...</string>
+    <string name="exit_code_label">Exit Code</string>
+    <string name="stdout_label">Standard Output</string>
+    <string name="stderr_label">Standard Error</string>
+    <string name="telemetry_title">Hardware Telemetry</string>
+    <string name="telemetry_arch">Architecture</string>
+    <string name="telemetry_cores">CPU Cores</string>
+    <string name="telemetry_ram">Available RAM</string>
+</resources>

@@ -1,0 +1,6 @@
+{
+  "name": "Termux Hub",
+  "description": "OpenWebUI-style command runner and dashboard for Termux with script presets, execution history, and hardware telemetry.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
